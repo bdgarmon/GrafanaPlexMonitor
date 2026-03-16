@@ -1,0 +1,47 @@
+{
+  "title": "Plex NOC Dashboard (Tautulli Exporter)",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Active Streams",
+      "targets": [
+        {
+          "expr": "plex_stream_sessions"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Streams by Decision",
+      "targets": [
+        {
+          "expr": "sum by(decision)(plex_stream_active)",
+          "legendFormat": "{{decision}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Bandwidth by User",
+      "targets": [
+        {
+          "expr": "sum by(user)(plex_stream_bitrate)",
+          "legendFormat": "{{user}}"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Streams by Client Device",
+      "targets": [
+        {
+          "expr": "sum by(client)(plex_stream_active)",
+          "legendFormat": "{{client}}"
+        }
+      ]
+    }
+  ]
+}

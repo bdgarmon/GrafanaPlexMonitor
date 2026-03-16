@@ -1,0 +1,13 @@
+
+version: "3"
+
+services:
+  tautulli-exporter:
+    build: .
+    container_name: tautulli-session-exporter
+    ports:
+      - "9594:9594"
+    environment:
+      - TAUTULLI_URL=http://localhost:8181
+      - TAUTULLI_API_KEY=6069979816ca45309405d05ad14b456b
+    restart: unless-stopped
