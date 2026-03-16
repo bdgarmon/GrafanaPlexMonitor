@@ -1,8 +1,6 @@
 # GrafanaPlexMonitor
 GrafanaPlexMonitoring is an advanced Grafana dashboard designed for monitoring a multi‑user Plex environment using **Tautulli** metrics exposed through **Prometheus**.
 
-This dashboard is intended for Plex servers hosting **4K remux libraries**, supporting **multiple remote users**, and operating under **limited WAN upload bandwidth** (for example ~350 Mbps).
-
 The dashboard helps operators quickly identify:
 
 - Active streaming sessions
