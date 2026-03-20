@@ -11,11 +11,11 @@ The dashboard helps operators quickly identify:
 - Estimated WAN saturation risk
 
 The goal is to provide a **Network Operations Center (NOC) style view of Plex activity** so administrators can diagnose playback failures or buffering events quickly.
-<img width="1730" height="1324" alt="Example1" src="https://github.com/user-attachments/assets/eaa493b0-9d02-4b52-9335-3bfc225b1c56" />
-
-<img width="1370" height="1418" alt="Example2" src="https://github.com/user-attachments/assets/74731d77-0f14-4c97-bde6-cbd6713672f9" />
-
-<img width="1361" height="769" alt="Example3" src="https://github.com/user-attachments/assets/596dc152-2494-4417-afd5-ab3824fe427f" />
+<img width="1392" height="473" alt="Example1" src="https://github.com/user-attachments/assets/9e864ece-9703-4507-8ecf-d8f2e1fe7ab9" />
+<img width="1379" height="1341" alt="Example2" src="https://github.com/user-attachments/assets/751f3298-3dd1-4e65-9dd9-9a3393ea221e" />
+<img width="1385" height="1415" alt="Example3" src="https://github.com/user-attachments/assets/cd2ba0ad-bd88-41f9-bb05-ce056b033535" />
+<img width="1385" height="1148" alt="Example4" src="https://github.com/user-attachments/assets/1706ad6b-89bd-4740-a12e-bcbab1ef3f41" />
+<img width="1386" height="843" alt="Example5" src="https://github.com/user-attachments/assets/987b8767-0851-4453-8411-7aaa021f4b0a" />
 
 ---
 
