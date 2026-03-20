@@ -112,7 +112,7 @@
         "x": 0,
         "y": 0
       },
-      "id": 2005,
+      "id": 2001,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -133,7 +133,9 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "plex_stream_sessions",
+          "editorMode": "code",
+          "expr": "sum(plex_stream_active)",
+          "range": true,
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -141,7 +143,7 @@
           }
         }
       ],
-      "title": "Active Streams",
+      "title": "Active Streams (Exporter)",
       "type": "stat"
     },
     {
@@ -178,7 +180,7 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 3,
         "y": 0
       },
@@ -234,6 +236,196 @@
                 "value": 80
               }
             ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 7,
+        "y": 0
+      },
+      "id": 1004,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "tautulli_stream_count_transcode",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Transcode Streams",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 11,
+        "y": 0
+      },
+      "id": 1002,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(plex_stream_active{decision=\"direct play\"})",
+          "range": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Direct Play Streams",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 15,
+        "y": 0
+      },
+      "id": 1003,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "sum(plex_stream_active{decision=\"direct stream\"})",
+          "range": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Direct Stream Streams",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
           },
           "unit": "Mbps"
         },
@@ -241,9 +433,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 6,
-        "y": 0
+        "w": 6,
+        "x": 0,
+        "y": 4
       },
       "id": 2017,
       "options": {
@@ -304,9 +496,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 4,
-        "x": 10,
-        "y": 0
+        "w": 5,
+        "x": 6,
+        "y": 4
       },
       "id": 2014,
       "options": {
@@ -368,9 +560,9 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 5,
-        "x": 14,
-        "y": 0
+        "w": 9,
+        "x": 11,
+        "y": 4
       },
       "id": 2015,
       "options": {
@@ -424,17 +616,18 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "bps"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 8,
         "x": 0,
-        "y": 4
+        "y": 8
       },
-      "id": 1001,
+      "id": 1006,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
@@ -455,7 +648,10 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "tautulli_stream_count_direct_play + tautulli_stream_count_direct_stream + tautulli_stream_count_transcode",
+          "editorMode": "code",
+          "expr": "sum by(location) (plex_stream_bandwidth)",
+          "legendFormat": "{{location}}",
+          "range": true,
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -463,7 +659,7 @@
           }
         }
       ],
-      "title": "Active Streams (Metric Accurate)",
+      "title": "WAN Bandwidth",
       "type": "stat"
     },
     {
@@ -473,6 +669,9 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -482,23 +681,28 @@
                 "value": 0
               },
               {
+                "color": "#EAB839",
+                "value": 10
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 25
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 3,
-        "y": 4
+        "w": 4,
+        "x": 8,
+        "y": 8
       },
-      "id": 1002,
+      "id": 1014,
       "options": {
-        "colorMode": "value",
+        "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
@@ -517,7 +721,9 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "tautulli_stream_count_direct_play",
+          "editorMode": "code",
+          "expr": "(\n  namedprocess_namegroup_memory_bytes{groupname=\"plex\", memtype=\"resident\"}\n/\n  scalar(node_memory_MemTotal_bytes)\n) * 100",
+          "range": true,
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -525,7 +731,7 @@
           }
         }
       ],
-      "title": "Direct Play Streams",
+      "title": "Plex Memory (Process)",
       "type": "stat"
     },
     {
@@ -560,8 +766,8 @@
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 6,
-        "y": 4
+        "x": 12,
+        "y": 8
       },
       "id": 1005,
       "options": {
@@ -604,7 +810,12 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -613,24 +824,45 @@
                 "value": 0
               },
               {
+                "color": "#EAB839",
+                "value": 20
+              },
+              {
                 "color": "red",
-                "value": 80
+                "value": 50
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "avg_over_time(\n  (\n    sum(rate(namedprocess_namegroup_cpu_seconds_total{groupname=\"plex\"}[1m]))\n    /\n    scalar(count(node_cpu_seconds_total{mode=\"system\"}))\n  )[5m:]\n) * 100"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": []
+          }
+        ]
       },
       "gridPos": {
         "h": 4,
         "w": 4,
-        "x": 10,
-        "y": 4
+        "x": 16,
+        "y": 8
       },
-      "id": 1004,
+      "id": 1013,
       "options": {
         "colorMode": "value",
-        "graphMode": "none",
+        "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
         "percentChangeColorMode": "standard",
@@ -648,7 +880,12 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "tautulli_stream_count_transcode",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(rate(namedprocess_namegroup_cpu_seconds_total{groupname=\"plex\"}[5m]))\n/\nscalar(count(node_cpu_seconds_total{mode=\"system\"}))\n* 100",
+          "instant": true,
+          "legendFormat": "Plex CPU Percentage",
+          "range": false,
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -656,7 +893,7 @@
           }
         }
       ],
-      "title": "Transcode Streams",
+      "title": "Plex CPU (Process)",
       "type": "stat"
     },
     {
@@ -666,6 +903,9 @@
       },
       "fieldConfig": {
         "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -684,80 +924,25 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 4,
-        "w": 5,
-        "x": 14,
-        "y": 4
-      },
-      "id": 1003,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "tautulli_stream_count_direct_stream",
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
-        }
-      ],
-      "title": "Direct Stream Streams",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
+        "h": 9,
+        "w": 20,
         "x": 0,
-        "y": 8
+        "y": 12
       },
-      "id": 2001,
+      "id": 2008,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "vertical",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -765,14 +950,17 @@
           "fields": "",
           "values": false
         },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
       },
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "plex_stream_sessions",
+          "editorMode": "code",
+          "expr": "sum by(platform) (plex_stream_active)",
+          "legendFormat": "{{user}} - {{platform}} - {{title}}",
+          "range": true,
           "refId": "A",
           "datasource": {
             "type": "prometheus",
@@ -780,87 +968,8 @@
           }
         }
       ],
-      "title": "Active Streams (Exporter)",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "bps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 6,
-        "x": 6,
-        "y": 8
-      },
-      "id": 1006,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "textMode": "auto",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "sum(plex_stream_bandwidth{location=\"wan\"}) / 1000",
-          "legendFormat": "LAN",
-          "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          },
-          "editorMode": "code",
-          "expr": "sum by(location) (plex_stream_bandwidth) / 1000",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "WAN",
-          "range": true,
-          "refId": "B"
-        }
-      ],
-      "title": "WAN Bandwidth",
-      "type": "stat"
+      "title": "Streams by Client Device",
+      "type": "bargauge"
     },
     {
       "datasource": {
@@ -908,6 +1017,8 @@
             }
           },
           "mappings": [],
+          "max": 100,
+          "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -920,15 +1031,16 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 20,
         "x": 0,
-        "y": 12
+        "y": 21
       },
       "id": 2026,
       "options": {
@@ -948,8 +1060,8 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "(sum(plex_stream_bandwidth{location=\"wan\"}) / 350000) * 100",
-          "legendFormat": "__auto",
+          "expr": "(\n  (sum(plex_stream_bandwidth{location=\"wan\"}) OR vector(0)) / 1000\n) / 350 * 100",
+          "legendFormat": "WAN Saturation",
           "range": true,
           "refId": "A",
           "datasource": {
@@ -998,9 +1110,9 @@
       },
       "gridPos": {
         "h": 6,
-        "w": 19,
+        "w": 20,
         "x": 0,
-        "y": 20
+        "y": 29
       },
       "id": 2012,
       "options": {
@@ -1070,10 +1182,23 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "description": "Top 5 active transcodes by bandwidth (Mbps). High values indicate heavy CPU/network usage.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "color-background"
+            },
+            "footer": {
+              "reducers": []
+            },
+            "inspect": false,
+            "minWidth": 100,
+            "wrapText": true
           },
           "mappings": [],
           "thresholds": {
@@ -1085,11 +1210,11 @@
               },
               {
                 "color": "#EAB839",
-                "value": 10
+                "value": 20
               },
               {
                 "color": "red",
-                "value": 25
+                "value": 60
               }
             ]
           },
@@ -1115,41 +1240,29 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 19,
+        "w": 20,
         "x": 0,
-        "y": 26
+        "y": 35
       },
       "id": 2023,
       "options": {
-        "displayMode": "gradient",
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": false
-        },
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "left",
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "color"
+        "cellHeight": "sm",
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Mbps"
+          }
+        ]
       },
       "pluginVersion": "12.3.0",
       "targets": [
         {
           "editorMode": "code",
-          "expr": "topk(5, sum by(user, title) (plex_stream_bandwidth{decision=\"transcode\"})) / 1000",
-          "legendFormat": "{{user}} - {{title}}",
+          "exemplar": false,
+          "expr": "topk(5,\n  max by(user, client, title, decision) (\n    plex_stream_bandwidth{decision=\"transcode\"}\n  )\n) / 1000",
+          "instant": false,
+          "legendFormat": "__auto",
           "range": true,
           "refId": "A",
           "datasource": {
@@ -1158,46 +1271,46 @@
           }
         }
       ],
-      "title": "Transcode Offenders",
+      "title": "Top Transcoding Streams (Live)",
       "transformations": [
         {
-          "id": "seriesToRows",
-          "options": {}
+          "id": "reduce",
+          "options": {
+            "labelsToFields": true,
+            "reducers": [
+              "lastNotNull"
+            ]
+          }
+        },
+        {
+          "id": "labelsToFields",
+          "options": {
+            "mode": "columns"
+          }
         },
         {
           "id": "organize",
           "options": {
             "excludeByName": {
-              "Time": true
+              "Field": true
             },
             "includeByName": {},
-            "indexByName": {},
+            "indexByName": {
+              "Field": 0,
+              "Last *": 5,
+              "client": 2,
+              "decision": 4,
+              "title": 3,
+              "user": 1
+            },
             "renameByName": {
-              "Metric": "User / Title",
-              "Value": "Mbps"
+              "Field": "",
+              "Last *": "Mbps"
             }
-          }
-        },
-        {
-          "id": "sortBy",
-          "options": {
-            "fields": {},
-            "sort": [
-              {
-                "desc": true,
-                "field": "Mbps"
-              }
-            ]
-          }
-        },
-        {
-          "id": "limit",
-          "options": {
-            "limitField": "5"
           }
         }
       ],
-      "type": "bargauge"
+      "type": "table"
     },
     {
       "datasource": {
@@ -1264,9 +1377,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 19,
+        "w": 20,
         "x": 0,
-        "y": 33
+        "y": 42
       },
       "id": 2009,
       "options": {
@@ -1359,106 +1472,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 19,
-        "x": 0,
-        "y": 40
-      },
-      "id": 2008,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "sum by(client) (plex_stream_active)",
-          "legendFormat": "{{client}}",
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
-        }
-      ],
-      "title": "Streams by Client Device",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 20,
         "x": 0,
-        "y": 47
+        "y": 49
       },
       "id": 2025,
       "options": {
@@ -1554,9 +1571,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 20,
         "x": 0,
-        "y": 55
+        "y": 57
       },
       "id": 2024,
       "options": {
@@ -1652,10 +1669,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 9,
+        "h": 6,
+        "w": 20,
         "x": 0,
-        "y": 63
+        "y": 65
       },
       "id": 2007,
       "options": {
@@ -1759,9 +1776,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 10,
-        "x": 9,
-        "y": 63
+        "w": 20,
+        "x": 0,
+        "y": 71
       },
       "id": 2013,
       "options": {
@@ -1855,9 +1872,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 9,
+        "w": 20,
         "x": 0,
-        "y": 70
+        "y": 78
       },
       "id": 2006,
       "options": {
@@ -1951,9 +1968,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 10,
-        "x": 9,
-        "y": 70
+        "w": 20,
+        "x": 0,
+        "y": 85
       },
       "id": 2019,
       "options": {
@@ -2041,112 +2058,16 @@
                 "value": 80
               }
             ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 9,
-        "x": 0,
-        "y": 77
-      },
-      "id": 2011,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "sum by(client) (plex_stream_active{decision=\"transcode\"})",
-          "legendFormat": "{{client}}",
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
-        }
-      ],
-      "title": "Clients Forcing Transcodes",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
           },
           "unit": "Mbps"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 10,
-        "x": 9,
-        "y": 77
+        "h": 9,
+        "w": 20,
+        "x": 0,
+        "y": 92
       },
       "id": 2021,
       "options": {
@@ -2240,9 +2161,105 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 9,
+        "w": 20,
         "x": 0,
-        "y": 84
+        "y": 101
+      },
+      "id": 2011,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "sum by(client) (plex_stream_active{decision=\"transcode\"})",
+          "legendFormat": "{{client}}",
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Clients Forcing Transcodes",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 108
       },
       "id": 2010,
       "options": {
@@ -2349,99 +2366,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 10,
-        "x": 9,
-        "y": 84
-      },
-      "id": 1010,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "sum(rate(node_disk_read_bytes_total[1m]))",
-          "refId": "A"
-        }
-      ],
-      "title": "Disk Read Throughput",
-      "type": "timeseries"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 9,
+        "h": 6,
+        "w": 20,
         "x": 0,
-        "y": 91
+        "y": 115
       },
-      "id": 1012,
+      "id": 2003,
       "options": {
         "legend": {
           "calcs": [],
@@ -2458,104 +2388,12 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "sum(rate(node_network_receive_bytes_total{device!='lo'}[1m]))",
-          "legendFormat": "RX",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(rate(node_network_transmit_bytes_total{device!='lo'}[1m]))",
-          "legendFormat": "TX",
-          "refId": "B"
-        }
-      ],
-      "title": "Network Throughput",
-      "type": "timeseries"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 10,
-        "x": 9,
-        "y": 92
-      },
-      "id": 1008,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "100 - (avg(rate(node_cpu_seconds_total{mode='idle'}[1m])) * 100)",
+          "expr": "sum by(user)(plex_stream_bitrate)",
+          "legendFormat": "{{user}}",
           "refId": "A"
         }
       ],
-      "title": "CPU Usage",
+      "title": "Bandwidth by User",
       "type": "timeseries"
     },
     {
@@ -2620,10 +2458,10 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
-        "w": 9,
+        "h": 7,
+        "w": 20,
         "x": 0,
-        "y": 99
+        "y": 121
       },
       "id": 2020,
       "options": {
@@ -2713,9 +2551,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 19,
+        "w": 20,
         "x": 0,
-        "y": 107
+        "y": 128
       },
       "id": 1007,
       "options": {
@@ -2750,268 +2588,6 @@
         }
       ],
       "title": "Direct Play vs Transcode (Real Time)",
-      "type": "timeseries"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 19,
-        "x": 0,
-        "y": 114
-      },
-      "id": 1009,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "avg(rate(node_cpu_seconds_total{mode='iowait'}[1m])) * 100",
-          "refId": "A"
-        }
-      ],
-      "title": "IO Wait",
-      "type": "timeseries"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 9,
-        "x": 0,
-        "y": 121
-      },
-      "id": 2003,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "sum by(user)(plex_stream_bitrate)",
-          "legendFormat": "{{user}}",
-          "refId": "A"
-        }
-      ],
-      "title": "Bandwidth by User",
-      "type": "timeseries"
-    },
-    {
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 10,
-        "x": 9,
-        "y": 121
-      },
-      "id": 1011,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "expr": "sum(rate(node_disk_read_time_seconds_total[1m]))",
-          "refId": "A"
-        }
-      ],
-      "title": "Disk Latency",
       "type": "timeseries"
     },
     {
@@ -3077,9 +2653,9 @@
       },
       "gridPos": {
         "h": 8,
-        "w": 10,
-        "x": 9,
-        "y": 127
+        "w": 20,
+        "x": 0,
+        "y": 135
       },
       "id": 2018,
       "options": {
@@ -3177,12 +2753,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
-        "w": 9,
+        "h": 7,
+        "w": 20,
         "x": 0,
-        "y": 128
+        "y": 143
       },
-      "id": 1014,
+      "id": 1008,
       "options": {
         "legend": {
           "calcs": [],
@@ -3199,11 +2775,11 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "container_memory_usage_bytes{name=~'.*plex.*'}",
+          "expr": "100 - (avg(rate(node_cpu_seconds_total{mode='idle'}[1m])) * 100)",
           "refId": "A"
         }
       ],
-      "title": "Plex Container Memory",
+      "title": "CPU Usage",
       "type": "timeseries"
     },
     {
@@ -3264,12 +2840,12 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
-        "w": 9,
+        "h": 8,
+        "w": 20,
         "x": 0,
-        "y": 133
+        "y": 150
       },
-      "id": 1013,
+      "id": 1012,
       "options": {
         "legend": {
           "calcs": [],
@@ -3286,19 +2862,286 @@
       "pluginVersion": "12.3.0",
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{name=~'.*plex.*'}[1m]))",
+          "expr": "sum(rate(node_network_receive_bytes_total{device!='lo'}[1m]))",
+          "legendFormat": "RX",
+          "refId": "A"
+        },
+        {
+          "expr": "sum(rate(node_network_transmit_bytes_total{device!='lo'}[1m]))",
+          "legendFormat": "TX",
+          "refId": "B"
+        }
+      ],
+      "title": "Network Throughput",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 158
+      },
+      "id": 1010,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "sum(rate(node_disk_read_bytes_total[1m]))",
           "refId": "A"
         }
       ],
-      "title": "Plex Container CPU (cadvisor)",
+      "title": "Disk Read Throughput",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 165
+      },
+      "id": 1011,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "sum(rate(node_disk_read_time_seconds_total[1m]))",
+          "refId": "A"
+        }
+      ],
+      "title": "Disk Latency",
+      "type": "timeseries"
+    },
+    {
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "showValues": false,
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 20,
+        "x": 0,
+        "y": 172
+      },
+      "id": 1009,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "expr": "avg(rate(node_cpu_seconds_total{mode='iowait'}[1m])) * 100",
+          "refId": "A"
+        }
+      ],
+      "title": "IO Wait",
       "type": "timeseries"
     },
     {
       "gridPos": {
-        "h": 5,
-        "w": 11,
+        "h": 7,
+        "w": 20,
         "x": 0,
-        "y": 136
+        "y": 179
       },
       "id": 2022,
       "options": {
@@ -3344,14 +3187,14 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Plex Monitoring Ultimate",
   "uid": "grafana-plex-ultimate",
-  "version": 36,
+  "version": 68,
   "weekStart": "",
   "id": null
 }
