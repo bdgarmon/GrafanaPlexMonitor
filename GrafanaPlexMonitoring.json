@@ -1,4 +1,60 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    },
+    {
+      "name": "VAR_WAN_MBPS",
+      "type": "constant",
+      "label": "WAN Upload Mbps",
+      "value": "350",
+      "description": ""
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "12.3.0"
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "stat",
+      "name": "Stat",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "text",
+      "name": "Text",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -18,13 +74,12 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 0,
   "links": [],
   "panels": [
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -73,7 +128,11 @@
       "targets": [
         {
           "expr": "plex_stream_sessions",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Active Streams",
@@ -82,7 +141,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -139,7 +198,11 @@
       "targets": [
         {
           "expr": "sum(plex_stream_active{decision=\"transcode\"})",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Concurrent Transcodes",
@@ -148,7 +211,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -198,7 +261,11 @@
       "targets": [
         {
           "expr": "sum(plex_stream_bitrate{resolution=~\"4k|2160|2160p\", decision!=\"transcode\"}) / 1000",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Estimated 4K Direct Play Load (Mbps)",
@@ -207,7 +274,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Simple operator score: 4K streams + weighted transcodes.",
       "fieldConfig": {
@@ -257,7 +324,11 @@
       "targets": [
         {
           "expr": "sum(plex_stream_active{resolution=~\"4k|2160|2160p\"}) + (sum(plex_stream_active{decision=\"transcode\"}) * 2)",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "4K Remux Risk Score",
@@ -266,7 +337,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Approx remaining 12 Mbps remote-friendly streams before WAN saturation.",
       "fieldConfig": {
@@ -317,7 +388,11 @@
       "targets": [
         {
           "expr": "($wan_mbps * 1000 - sum(plex_stream_bitrate)) / 12000",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Remote-Friendly Capacity Remaining",
@@ -326,7 +401,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -375,7 +450,11 @@
       "targets": [
         {
           "expr": "tautulli_stream_count_direct_play + tautulli_stream_count_direct_stream + tautulli_stream_count_transcode",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Active Streams (Metric Accurate)",
@@ -384,7 +463,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -433,7 +512,11 @@
       "targets": [
         {
           "expr": "tautulli_stream_count_direct_play",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Direct Play Streams",
@@ -442,7 +525,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -498,7 +581,11 @@
           "editorMode": "code",
           "expr": "sum(plex_stream_bandwidth) / 1000",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Total Plex Bandwidth",
@@ -507,7 +594,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -556,7 +643,11 @@
       "targets": [
         {
           "expr": "tautulli_stream_count_transcode",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Transcode Streams",
@@ -565,7 +656,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -614,7 +705,11 @@
       "targets": [
         {
           "expr": "tautulli_stream_count_direct_stream",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Direct Stream Streams",
@@ -623,7 +718,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -672,7 +767,11 @@
       "targets": [
         {
           "expr": "plex_stream_sessions",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Active Streams (Exporter)",
@@ -681,7 +780,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -734,12 +833,16 @@
           "expr": "sum(plex_stream_bandwidth{location=\"wan\"}) / 1000",
           "legendFormat": "LAN",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         },
         {
           "datasource": {
             "type": "prometheus",
-            "uid": "aeywhoxdrnpj4e"
+            "uid": "${DS_PROMETHEUS}"
           },
           "editorMode": "code",
           "expr": "sum by(location) (plex_stream_bandwidth) / 1000",
@@ -756,7 +859,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Based on 350Mbps upload max",
       "fieldConfig": {
@@ -842,7 +945,11 @@
           "expr": "(sum(plex_stream_bandwidth{location=\"wan\"}) / 350000) * 100",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "WAN Saturation %",
@@ -851,7 +958,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -903,7 +1010,11 @@
           "instant": true,
           "legendFormat": "{{user}} - {{title}}",
           "range": false,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Top 5 Bandwidth Users (Mbps)",
@@ -951,7 +1062,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Approximation using client labels; tune label filters to your environment if needed.",
       "fieldConfig": {
@@ -1036,7 +1147,11 @@
         {
           "expr": "sum(plex_stream_bitrate{client!~\".*local.*|AS.*\"}) / 1000",
           "legendFormat": "Estimated Remote Mbps",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Remote Bandwidth Consumption (Mbps)",
@@ -1045,7 +1160,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1130,7 +1245,11 @@
           "expr": "topk(5, sum by(user, title) (plex_stream_bandwidth{decision=\"transcode\"})) / 1000",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Transcode Offenders",
@@ -1139,7 +1258,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1222,7 +1341,11 @@
         {
           "expr": "sum by(client) (plex_stream_active)",
           "legendFormat": "{{client}}",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Streams by Client Device",
@@ -1231,7 +1354,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1316,7 +1439,11 @@
           "expr": "sum by(hw_encoding) (plex_stream_active)",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Hardware vs Software Transcoding",
@@ -1325,7 +1452,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "aeywhoxdrnpj4e"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1410,7 +1537,11 @@
           "expr": "sum(plex_stream_bandwidth{resolution=\"4k\", location=\"wan\"}) / 1000",
           "legendFormat": "__auto",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "4K WAN Load",
@@ -1419,7 +1550,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1503,7 +1634,11 @@
         {
           "expr": "sum by(user) (plex_stream_bitrate) / 1000",
           "legendFormat": "{{user}}",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Bandwidth by User (Mbps)",
@@ -1512,7 +1647,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "description": "Based on total declared stream bitrate versus 350 Mbps upload ceiling.",
       "fieldConfig": {
@@ -1605,7 +1740,11 @@
         {
           "expr": "sum(plex_stream_bitrate) / ($wan_mbps * 1000)",
           "legendFormat": "Utilization",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "WAN Saturation Prediction",
@@ -1614,7 +1753,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1697,7 +1836,11 @@
         {
           "expr": "sum by(decision) (plex_stream_active)",
           "legendFormat": "{{decision}}",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Streams by Decision",
@@ -1706,7 +1849,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1789,7 +1932,11 @@
         {
           "expr": "sum by(client,decision) (plex_stream_active)",
           "legendFormat": "{{client}} - {{decision}}",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Problem Clients Under Multi-User Load",
@@ -1798,7 +1945,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1881,7 +2028,11 @@
         {
           "expr": "sum by(client) (plex_stream_active{decision=\"transcode\"})",
           "legendFormat": "{{client}}",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Clients Forcing Transcodes",
@@ -1890,7 +2041,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -1974,7 +2125,11 @@
         {
           "expr": "sum by(user,client) (plex_stream_bitrate) / 1000",
           "legendFormat": "{{user}} - {{client}}",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Per-User Bitrate Pressure (Mbps)",
@@ -1983,7 +2138,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2066,17 +2221,29 @@
         {
           "expr": "sum(plex_stream_active{resolution=~\"4k|2160|2160p\"})",
           "legendFormat": "4K",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         },
         {
           "expr": "sum(plex_stream_active{resolution=~\"1080|1080p|fullhd|fhd\"})",
           "legendFormat": "1080p",
-          "refId": "B"
+          "refId": "B",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         },
         {
           "expr": "sum(plex_stream_active{resolution!~\"4k|2160|2160p|1080|1080p|fullhd|fhd\"})",
           "legendFormat": "Other",
-          "refId": "C"
+          "refId": "C",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "4K vs 1080p Session Count",
@@ -2352,7 +2519,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2435,7 +2602,11 @@
         {
           "expr": "sum by(resolution) (plex_stream_active)",
           "legendFormat": "{{resolution}}",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "Session Mix by Resolution",
@@ -2804,7 +2975,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "prometheus"
+        "uid": "${DS_PROMETHEUS}"
       },
       "fieldConfig": {
         "defaults": {
@@ -2887,12 +3058,20 @@
         {
           "expr": "sum by(user) (plex_stream_active{resolution=~\"4k|2160|2160p\", decision!=\"transcode\"})",
           "legendFormat": "{{user}} 4K Direct",
-          "refId": "A"
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         },
         {
           "expr": "sum by(user) (plex_stream_active{resolution=~\"4k|2160|2160p\", decision=\"transcode\"})",
           "legendFormat": "{{user}} 4K Transcode",
-          "refId": "B"
+          "refId": "B",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
         }
       ],
       "title": "User Mix: 4K Direct Play vs 4K Transcode",
@@ -3073,10 +3252,6 @@
       "type": "timeseries"
     },
     {
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 5,
         "w": 11,
@@ -3105,16 +3280,24 @@
   "templating": {
     "list": [
       {
-        "current": {
-          "text": "350",
-          "value": "350"
-        },
         "hide": 2,
         "label": "WAN Upload Mbps",
         "name": "wan_mbps",
-        "query": "350",
+        "query": "${VAR_WAN_MBPS}",
         "skipUrlSync": true,
-        "type": "constant"
+        "type": "constant",
+        "current": {
+          "value": "${VAR_WAN_MBPS}",
+          "text": "${VAR_WAN_MBPS}",
+          "selected": false
+        },
+        "options": [
+          {
+            "value": "${VAR_WAN_MBPS}",
+            "text": "${VAR_WAN_MBPS}",
+            "selected": false
+          }
+        ]
       }
     ]
   },
@@ -3126,5 +3309,7 @@
   "timezone": "",
   "title": "Plex Monitoring Ultimate",
   "uid": "grafana-plex-ultimate",
-  "version": 33
+  "version": 33,
+  "weekStart": "",
+  "id": null
 }
