@@ -19,6 +19,12 @@
   "__elements": {},
   "__requires": [
     {
+      "type": "panel",
+      "id": "bargauge",
+      "name": "Bar gauge",
+      "version": ""
+    },
+    {
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
@@ -991,8 +997,8 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 7,
-        "w": 9,
+        "h": 6,
+        "w": 19,
         "x": 0,
         "y": 20
       },
@@ -1064,6 +1070,140 @@
         "type": "prometheus",
         "uid": "${DS_PROMETHEUS}"
       },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 10
+              },
+              {
+                "color": "red",
+                "value": 25
+              }
+            ]
+          },
+          "unit": "Mbits"
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "{title=\"Cars\", user=\"haley.khiara\"}"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": []
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 19,
+        "x": 0,
+        "y": 26
+      },
+      "id": 2023,
+      "options": {
+        "displayMode": "gradient",
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "left",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "color"
+      },
+      "pluginVersion": "12.3.0",
+      "targets": [
+        {
+          "editorMode": "code",
+          "expr": "topk(5, sum by(user, title) (plex_stream_bandwidth{decision=\"transcode\"})) / 1000",
+          "legendFormat": "{{user}} - {{title}}",
+          "range": true,
+          "refId": "A",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "${DS_PROMETHEUS}"
+          }
+        }
+      ],
+      "title": "Transcode Offenders",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Metric": "User / Title",
+              "Value": "Mbps"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "Mbps"
+              }
+            ]
+          }
+        },
+        {
+          "id": "limit",
+          "options": {
+            "limitField": "5"
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "${DS_PROMETHEUS}"
+      },
       "description": "Approximation using client labels; tune label filters to your environment if needed.",
       "fieldConfig": {
         "defaults": {
@@ -1124,9 +1264,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 10,
-        "x": 9,
-        "y": 20
+        "w": 19,
+        "x": 0,
+        "y": 33
       },
       "id": 2009,
       "options": {
@@ -1220,107 +1360,9 @@
       },
       "gridPos": {
         "h": 7,
-        "w": 9,
+        "w": 19,
         "x": 0,
-        "y": 27
-      },
-      "id": 2023,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.0",
-      "targets": [
-        {
-          "editorMode": "code",
-          "expr": "topk(5, sum by(user, title) (plex_stream_bandwidth{decision=\"transcode\"})) / 1000",
-          "legendFormat": "__auto",
-          "range": true,
-          "refId": "A",
-          "datasource": {
-            "type": "prometheus",
-            "uid": "${DS_PROMETHEUS}"
-          }
-        }
-      ],
-      "title": "Transcode Offenders",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "${DS_PROMETHEUS}"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": false,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 10,
-        "x": 9,
-        "y": 27
+        "y": 40
       },
       "id": 2008,
       "options": {
@@ -1416,7 +1458,7 @@
         "h": 8,
         "w": 19,
         "x": 0,
-        "y": 34
+        "y": 47
       },
       "id": 2025,
       "options": {
@@ -1514,7 +1556,7 @@
         "h": 8,
         "w": 19,
         "x": 0,
-        "y": 42
+        "y": 55
       },
       "id": 2024,
       "options": {
@@ -1613,7 +1655,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 50
+        "y": 63
       },
       "id": 2007,
       "options": {
@@ -1719,7 +1761,7 @@
         "h": 7,
         "w": 10,
         "x": 9,
-        "y": 50
+        "y": 63
       },
       "id": 2013,
       "options": {
@@ -1815,7 +1857,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 57
+        "y": 70
       },
       "id": 2006,
       "options": {
@@ -1911,7 +1953,7 @@
         "h": 7,
         "w": 10,
         "x": 9,
-        "y": 57
+        "y": 70
       },
       "id": 2019,
       "options": {
@@ -2007,7 +2049,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 64
+        "y": 77
       },
       "id": 2011,
       "options": {
@@ -2104,7 +2146,7 @@
         "h": 7,
         "w": 10,
         "x": 9,
-        "y": 64
+        "y": 77
       },
       "id": 2021,
       "options": {
@@ -2200,7 +2242,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 71
+        "y": 84
       },
       "id": 2010,
       "options": {
@@ -2310,7 +2352,7 @@
         "h": 8,
         "w": 10,
         "x": 9,
-        "y": 71
+        "y": 84
       },
       "id": 1010,
       "options": {
@@ -2397,7 +2439,7 @@
         "h": 8,
         "w": 9,
         "x": 0,
-        "y": 78
+        "y": 91
       },
       "id": 1012,
       "options": {
@@ -2490,7 +2532,7 @@
         "h": 8,
         "w": 10,
         "x": 9,
-        "y": 79
+        "y": 92
       },
       "id": 1008,
       "options": {
@@ -2581,7 +2623,7 @@
         "h": 8,
         "w": 9,
         "x": 0,
-        "y": 86
+        "y": 99
       },
       "id": 2020,
       "options": {
@@ -2673,7 +2715,7 @@
         "h": 7,
         "w": 19,
         "x": 0,
-        "y": 94
+        "y": 107
       },
       "id": 1007,
       "options": {
@@ -2771,7 +2813,7 @@
         "h": 7,
         "w": 19,
         "x": 0,
-        "y": 101
+        "y": 114
       },
       "id": 1009,
       "options": {
@@ -2858,7 +2900,7 @@
         "h": 7,
         "w": 9,
         "x": 0,
-        "y": 108
+        "y": 121
       },
       "id": 2003,
       "options": {
@@ -2946,7 +2988,7 @@
         "h": 6,
         "w": 10,
         "x": 9,
-        "y": 108
+        "y": 121
       },
       "id": 1011,
       "options": {
@@ -3037,7 +3079,7 @@
         "h": 8,
         "w": 10,
         "x": 9,
-        "y": 114
+        "y": 127
       },
       "id": 2018,
       "options": {
@@ -3138,7 +3180,7 @@
         "h": 5,
         "w": 9,
         "x": 0,
-        "y": 115
+        "y": 128
       },
       "id": 1014,
       "options": {
@@ -3225,7 +3267,7 @@
         "h": 3,
         "w": 9,
         "x": 0,
-        "y": 120
+        "y": 133
       },
       "id": 1013,
       "options": {
@@ -3256,7 +3298,7 @@
         "h": 5,
         "w": 11,
         "x": 0,
-        "y": 123
+        "y": 136
       },
       "id": 2022,
       "options": {
@@ -3309,7 +3351,7 @@
   "timezone": "",
   "title": "Plex Monitoring Ultimate",
   "uid": "grafana-plex-ultimate",
-  "version": 33,
+  "version": 36,
   "weekStart": "",
   "id": null
 }
